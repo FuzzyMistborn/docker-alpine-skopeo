@@ -6,17 +6,31 @@ trigger:
   event:
   - cron
   cron:
-  - weekly
+  - monthly
+
+volumes:
+- name: docker_sock
+  host:
+    path: /var/run/docker.sock
 
 steps:
-- name: DockerHub  
-  image: plugins/docker
-  settings:
-    username: fuzzymistborn
-    password:
+- name: Build and push release
+  image: fuzzymistborn/docker-alpine-skopeo:latest
+  environment:
+    DOCKERHUB_PASS:
       from_secret: dockerhub_pw
-    repo: fuzzymistborn/docker-alpine-skopeo
-    tags: latest
+    GHCR_PASS:
+      from_secret: ghcr_pw
+    ALPINE_VER: 3.14
+  volumes:
+    - name: docker_sock
+      path: /var/run/docker.sock
+  commands:
+    - docker login docker.io -u fuzzymistborn -p $DOCKERHUB_PASS
+    - docker login ghcr.io -u fuzzymistborn -p $GHCR_PASS
+    - docker build -t fuzzymistborn/docker-alpine-skopeo:latest -t fuzzymistborn/docker-alpine-skopeo:$ANSIBLE_VER -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:latest -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:$ANSIBLE_VER .
+    - docker push --all-tags fuzzymistborn/docker-alpine-skopeo
+    - docker push --all-tags ghcr.io/fuzzymistborn/docker-alpine-skopeo
 
 - name: Send TG Notification
   image: appleboy/drone-telegram
