@@ -22,7 +22,7 @@ steps:
   commands:
     - docker login docker.io -u fuzzymistborn -p $DOCKERHUB_PASS
     - docker login ghcr.io -u fuzzymistborn -p $GHCR_PASS
-    - docker build -t fuzzymistborn/docker-alpine-skopeo:latest -t fuzzymistborn/docker-alpine-skopeo:$ANSIBLE_VER -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:latest -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:$ANSIBLE_VER .
+    - docker build -t fuzzymistborn/docker-alpine-skopeo:latest -t fuzzymistborn/docker-alpine-skopeo:$ALPINE_VER -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:latest -t ghcr.io/fuzzymistborn/docker-alpine-skopeo:$ALPINE_VER .
     - docker push --all-tags fuzzymistborn/docker-alpine-skopeo
     - docker push --all-tags ghcr.io/fuzzymistborn/docker-alpine-skopeo
 
