@@ -14,5 +14,5 @@ LABEL \
   org.opencontainers.image.revision=$VCS_REF \
   org.opencontainers.image.created=$BUILD_DATE
 
-RUN apk add --update docker openrc skopeo
+RUN apk add --update docker openrc skopeo curl
 RUN rc-update add docker boot
