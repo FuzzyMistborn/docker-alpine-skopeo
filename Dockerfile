@@ -1,4 +1,4 @@
-FROM alpine:3.17
+FROM alpine:3.20
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -6,7 +6,7 @@ ARG VCS_REF
 LABEL \
   maintainer="FuzzyMistborn <fuzzy@fuzzymistborn.com>" \
   architecture="amd64/x86_64" \
-  alpine-version="3.17" \
+  alpine-version="3.20" \
   org.opencontainers.image.title="docker-alpine-skopeo" \
   org.opencontainers.image.authors="FuzzyMistborn <fuzzy@fuzzymistborn.com>" \
   org.opencontainers.image.description="Alpine image with both Docker and Skopeo" \
