@@ -2,7 +2,7 @@ steps:
   - name: Build and push release
     image: fuzzymistborn/docker-alpine-skopeo:latest
     environment:
-      ALPINE_VER: alpine-3.20
+      ALPINE_VER: alpine-3.22
       ghcr_pass:
         from_secret: ghcr_pass
       dockerhub_pass:
